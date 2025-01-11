@@ -12,6 +12,23 @@ export async function GetHeroImages() {
     )
 }
 
+export async function GetProductBySlug (slug: string) {
+    return SanityClient.fetch(
+        groq`
+        [_type == "product" && slug.current == "${slug}"][0] {
+        _id,
+          images,
+          price,
+          name,
+          description,
+          "slug": slug.current,
+          "categoryName": category->name,
+          price_id
+      }
+        `
+    )
+}
+
 export async function GetNewestProducts() {
     return SanityClient.fetch(
         groq`

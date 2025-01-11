@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { GetNewestProducts } from "@/sanity/config/sanity.query";
+import { Button } from "./button";
 
 export default async function NewestCollection() {
   const latestProductData: any = await GetNewestProducts();
@@ -53,6 +54,17 @@ export default async function NewestCollection() {
                     ${product.price}
                   </p>
                 </div>
+                <Button
+                  className="snipcart-add-item"
+                  data-item-id={product._id}
+                  data-item-price={product.price}
+                  // data-item-url={`/product/${product.slug}`}
+                  data-item-description={product.description}
+                  data-item-image={product.imageURL}
+                  data-item-name={product.name}
+                >
+                  Add to cart
+                </Button>
               </div>
             ))}
           </div>
